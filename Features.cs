@@ -91,7 +91,6 @@ namespace Final_Project
             return shelf;
         }
     }
-   
     public class Shelf : Container
     {
         public static new FeatureType type = FeatureType.SHELF;
@@ -165,9 +164,8 @@ namespace Final_Project
 
         }
     
-        public static void EncounterMonster()
+        public static MonsterEncounter EncounterMonster()
         {
-
         }
     }
 }

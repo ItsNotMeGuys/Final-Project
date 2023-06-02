@@ -83,6 +83,16 @@ namespace Final_Project {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dead_monster {
+            get {
+                object obj = ResourceManager.GetObject("dead_monster", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap door_a {
             get {
                 object obj = ResourceManager.GetObject("door_a", resourceCulture);

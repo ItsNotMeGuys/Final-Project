@@ -21,8 +21,11 @@ namespace Final_Project
             Room room = new Room();
 
             room.left = GenFeature();
+            room.left.name += " (left wall)";
             room.center = GenFeature();
+            room.left.name += " (middle wall)";
             room.right = GenFeature();
+            room.left.name += " (right wall)";
 
             RoomFeature.FeatureType door = RoomFeature.FeatureType.DOOR;
             bool ladder = room.left.type != door && room.center.type != door && room.right.type != door;
@@ -34,8 +37,17 @@ namespace Final_Project
         }
         private static RoomFeature GenMiddle()
         {
-            if (Globals.rand.Next(2) == 1) return Ladder.Generate();
-            else return MonsterEncounter.EncounterMonster();
+            int r = Globals.rand.Next(5);
+            if (r == 0) // 1/5 is monster
+            {
+                return MonsterEncounter.EncounterMonster();
+            }else if (r <= 2) // 2/5 is pedestal
+            {
+                return Pedestal.Generate();
+            } else // 2/5 is empty
+            {
+                return null;
+            }
         }
         private static RoomFeature GenFeature()
         {
@@ -64,16 +76,17 @@ namespace Final_Project
             PAINTING,
             ENCOUNTER
         };
-        Image image
+        public Image image
         {
             get;
             set;
         }
-        string description 
+        public string description
         { 
             get; 
             set; 
         }
+        public string name = "feature";
 
         public FeatureType type = FeatureType.EMPTY;
         public RoomFeature(Image image, string description)

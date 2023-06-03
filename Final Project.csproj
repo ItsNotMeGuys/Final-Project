@@ -68,11 +68,11 @@
       <DependentUpon>frmMonsterFight.cs</DependentUpon>
     </Compile>
     <Compile Include="GameSettings.cs" />
-    <Compile Include="GetSlotPopup.cs">
+    <Compile Include="frmSlotPopup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GetSlotPopup.Designer.cs">
-      <DependentUpon>GetSlotPopup.cs</DependentUpon>
+    <Compile Include="frmSlotPopup.Designer.cs">
+      <DependentUpon>frmSlotPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="Images.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -91,8 +91,8 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GetSlotPopup.resx">
-      <DependentUpon>GetSlotPopup.cs</DependentUpon>
+    <EmbeddedResource Include="frmSlotPopup.resx">
+      <DependentUpon>frmSlotPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Images.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -149,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dead_monster.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pedestal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

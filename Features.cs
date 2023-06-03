@@ -11,17 +11,15 @@ namespace Final_Project
     public class Painting_F : RoomFeature
     {
         public bool is_trap;
-        public new FeatureType type = FeatureType.PAINTING;
 
         bool used = false;
 
         public Painting_F(Image image, string description, bool trap) : base(image, description)
         {
+            type = FeatureType.PAINTING;
+            this.name = "Painting";
             is_trap = trap;
         }
-
-        public Image image;
-        public string description;
 
         public override void Interact(Entity interacter)
         {
@@ -66,9 +64,9 @@ namespace Final_Project
     {
         Item item;
         bool used = false;
-        public new FeatureType type = FeatureType.EMPTY;
         public Container(Image image, string description, Item item) : base(image, description)
         {
+            this.type = FeatureType.EMPTY;
             this.item = item;
         }
 
@@ -93,10 +91,10 @@ namespace Final_Project
     }
     public class Shelf : Container
     {
-        public static new FeatureType type = FeatureType.SHELF;
         public Shelf(Image image, string description, Item item) : base(image, description, item)
         {
-
+            type = FeatureType.SHELF;
+            this.name = "Shelf";
         }
         public static new Shelf Generate()
         {
@@ -108,11 +106,32 @@ namespace Final_Project
             return shelf;
         }
     }
+    public class Pedestal : Container
+    {
+        public Pedestal(Image image, string description, Item item) : base(image, description, item)
+        {
+            type = FeatureType.PEDESTAL;
+            name = "Pedestal";
+        }
+        public static new Pedestal Generate()
+        {
+            Image display = Images.pedestal;
+            Equipment equip;
+            if (Globals.rand.Next(5) == 1) // vampiric weapon (1/5 chance)
+                equip = VampiricWeapon.GenerateWeapon();
+            else
+                equip = BasicWeapon.GenerateWeapon();
+            string description = $"A pedestal with a mysterious sword inside.\nThe sword is named {equip.GetName()}";
+            Pedestal pedestal = new Pedestal(display, description, equip);
+            return pedestal;
+        }
+    }
     public class Door : RoomFeature
     {
-        public new FeatureType type = FeatureType.DOOR;
         public Door(Image image, string description) : base(image, description)
         {
+            type = FeatureType.DOOR;
+            this.name = "Door";
         }
 
         public override void Interact(Entity interacter)
@@ -141,9 +160,10 @@ namespace Final_Project
     }
     public class Ladder : RoomFeature
     {
-        public new FeatureType type = FeatureType.LADDER;
         public Ladder(Image image, string description) : base(image, description)
         {
+            type = FeatureType.LADDER;
+            this.name = "Ladder";
         }
 
         public override void Interact(Entity interacter)
@@ -161,7 +181,7 @@ namespace Final_Project
     {
         public MonsterEncounter(Image image, string description) : base(image, description)
         {
-
+            type = FeatureType.ENCOUNTER;
         }
     
         public static MonsterEncounter EncounterMonster()

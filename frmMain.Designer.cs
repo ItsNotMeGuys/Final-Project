@@ -98,7 +98,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // gameToolStripMenuItem
@@ -113,13 +113,14 @@
             // viewInventoryToolStripMenuItem
             // 
             this.viewInventoryToolStripMenuItem.Name = "viewInventoryToolStripMenuItem";
-            this.viewInventoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewInventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewInventoryToolStripMenuItem.Text = "View Inventory";
+            this.viewInventoryToolStripMenuItem.Click += new System.EventHandler(this.viewInventoryToolStripMenuItem_Click);
             // 
             // viewStatsToolStripMenuItem
             // 
             this.viewStatsToolStripMenuItem.Name = "viewStatsToolStripMenuItem";
-            this.viewStatsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewStatsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewStatsToolStripMenuItem.Text = "View Stats";
             // 
             // lblItemDisplay
@@ -132,7 +133,7 @@
             // 
             // pbItemImage
             // 
-            this.pbItemImage.Location = new System.Drawing.Point(439, 34);
+            this.pbItemImage.Location = new System.Drawing.Point(439, 38);
             this.pbItemImage.Name = "pbItemImage";
             this.pbItemImage.Size = new System.Drawing.Size(300, 300);
             this.pbItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

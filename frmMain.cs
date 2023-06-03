@@ -16,5 +16,15 @@ namespace Final_Project
         {
             InitializeComponent();
         }
+
+        private void viewInventoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInventory.ViewInventory(Globals.player, false);
+        }
+        private void displayActions()
+        {
+            lbActions.Items.Clear();
+            
+        }
     }
 }

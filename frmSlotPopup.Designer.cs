@@ -1,6 +1,6 @@
 ﻿namespace Final_Project
 {
-    partial class GetSlotPopup
+    partial class frmSlotPopup
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GetSlotPopup));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSlotPopup));
             this.pbItem1 = new System.Windows.Forms.PictureBox();
             this.pbItem2 = new System.Windows.Forms.PictureBox();
             this.pbItem3 = new System.Windows.Forms.PictureBox();
@@ -98,7 +98,7 @@
             this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.lblDescription.Location = new System.Drawing.Point(12, 115);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(424, 153);
+            this.lblDescription.Size = new System.Drawing.Size(418, 153);
             this.lblDescription.TabIndex = 5;
             this.lblDescription.Text = "...";
             // 

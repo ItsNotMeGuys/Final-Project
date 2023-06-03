@@ -117,6 +117,7 @@
             this.btnEquip.TabIndex = 7;
             this.btnEquip.Text = "Equip";
             this.btnEquip.UseVisualStyleBackColor = true;
+            this.btnEquip.Click += new System.EventHandler(this.btnEquip_Click);
             // 
             // lbInventoryItems
             // 

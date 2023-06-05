@@ -18,21 +18,31 @@ namespace Final_Project
         }
         private void frmInventory_Load(object sender, EventArgs e)
         {
+            updateView();
+        }
+        private void updateView()
+        {
+            lvInventoryItems.Items.Clear();
             foreach (Item item in entity.inventory)
             {
-                lbInventoryItems.Items.Add(item);  // possibly change later?
+                ListViewItem i = new ListViewItem();
+                i.Text = item.GetName();
+                i.Tag = item;
+                lvInventoryItems.Items.Add(i);
             }
+
+            pbItemImage.Image = null;
+            lblItemStats.Text = "";
         }
         Entity entity;
-        public static void ViewInventory(Entity entity, bool read_only)
+        public static void ViewInventory(Entity entity, bool battle)
         {
             frmInventory inventory = new frmInventory();
 
-            inventory.btnUse.Enabled = !read_only;
-            inventory.btnDrop.Enabled = !read_only;
-            inventory.btnEquip.Enabled = !read_only;
+            inventory.btnDrop.Enabled = !battle;
+            inventory.btnEquip.Enabled = !battle;
             inventory.entity = entity;
-            inventory.lbInventoryItems.Items.Clear();
+            inventory.lvInventoryItems.Items.Clear();
             inventory.ShowDialog();
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,34 +51,42 @@ namespace Final_Project
         }
         private void btnUse_Click(object sender, EventArgs e)
         {
-
-            if (lbInventoryItems.SelectedIndex > lbInventoryItems.Items.Count || lbInventoryItems.SelectedIndex < 0)
-                return;
-
-            Item selected = (Item) lbInventoryItems.Items[lbInventoryItems.SelectedIndex];
+            if (lvInventoryItems.SelectedItems.Count == 0) return;
+            Item selected = (Item)lvInventoryItems.SelectedItems[0].Tag;
             selected.Use(entity);
         }
         private void btnView_Click(object sender, EventArgs e)
         {
-            if (lbInventoryItems.SelectedIndex > lbInventoryItems.Items.Count || lbInventoryItems.SelectedIndex < 0)
-                return;
-
-            Item selected = (Item) lbInventoryItems.Items[lbInventoryItems.SelectedIndex];
+            if (lvInventoryItems.SelectedItems.Count == 0) return;
+            Item selected = (Item)lvInventoryItems.SelectedItems[0].Tag;
             selected.Display(pbItemImage, lblItemStats);
         }
         private void btnEquip_Click(object sender, EventArgs e)
         {
-            if (lbInventoryItems.SelectedIndex > lbInventoryItems.Items.Count || lbInventoryItems.SelectedIndex < 0)
-                return;
-
-            Equipment item = lbInventoryItems.Items[lbInventoryItems.SelectedIndex] as Equipment;
+            if (lvInventoryItems.SelectedItems.Count == 0) return;
+            Equipment item = lvInventoryItems.SelectedItems[0].Tag as Equipment;
 
             if (item != null)
             {
-                int selectedIndex = frmSlotPopup.GetEquipmentSlot(entity.quickSlots);
+                int selectedIndex = frmSlotPopup.GetEquipmentSlot(entity.quickSlots, false);
+                for (int i = 0; i < entity.quickSlots.Length; i++)
+                {
+                    if (entity.quickSlots[i] == item)
+                        entity.quickSlots[i] = null;
+                }
                 entity.quickSlots[selectedIndex] = item;
+
             }
             else MessageBox.Show("Invalid item selected");
+        }
+
+        private void btnDrop_Click(object sender, EventArgs e)
+        {
+            if (lvInventoryItems.SelectedItems.Count == 0) return;
+            Item item = lvInventoryItems.SelectedItems[0].Tag as Item;
+            entity.inventory.Remove(item);
+            Room.currentRoom.floorItems.Add(new ItemFeature(item));
+            updateView();
         }
     }
 }

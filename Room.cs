@@ -10,22 +10,38 @@ namespace Final_Project
 {
     class Room
     {
-        RoomFeature left, center, right, middle;
-        public static Room currentRoom;
-        private static Room prevRoom;
-        
+        public RoomFeature left, center, right, middle;
+        public List<ItemFeature> floorItems = new List<ItemFeature>();
+        public static Room currentRoom = null;
+        private static Room prevRoom = null;
+
+        public static int rooms = 0;
+        public void ClearUsedPaintingsAndItems()
+        {
+            if ((left as ItemFeature != null || left as Painting_F != null) && left.used)
+                left = null;
+            if ((center as ItemFeature != null || center as Painting_F != null) && center.used)
+                center = null;
+            if ((right as ItemFeature != null || right as Painting_F != null) && right.used)
+                right = null;
+            if ((middle as ItemFeature != null || middle as Painting_F != null) && middle.used)
+                middle = null;
+
+            floorItems.RemoveAll(x => x.used);
+        }
         public static void GenNewRoom()
         {
             prevRoom = currentRoom;
 
             Room room = new Room();
+            rooms++;
 
             room.left = GenFeature();
             room.left.name += " (left wall)";
             room.center = GenFeature();
-            room.left.name += " (middle wall)";
+            room.center.name += " (middle wall)";
             room.right = GenFeature();
-            room.left.name += " (right wall)";
+            room.right.name += " (right wall)";
 
             RoomFeature.FeatureType door = RoomFeature.FeatureType.DOOR;
             bool ladder = room.left.type != door && room.center.type != door && room.right.type != door;
@@ -34,24 +50,31 @@ namespace Final_Project
                 room.middle = Ladder.Generate();
             else
                 room.middle = GenMiddle();
+
+            currentRoom = room;
+            if (Globals.player.health == 0)
+            {
+                return;
+            }
+            Globals.mainForm.updateView();
         }
         private static RoomFeature GenMiddle()
         {
             int r = Globals.rand.Next(5);
-            if (r == 0) // 1/5 is monster
+            if (r <= 1) // 2/5 is monster
             {
                 return MonsterEncounter.EncounterMonster();
-            }else if (r <= 2) // 2/5 is pedestal
+            }else if (r <= 3) // 2/5 is pedestal
             {
                 return Pedestal.Generate();
-            } else // 2/5 is empty
+            } else // 1/5 is empty
             {
                 return null;
             }
         }
         private static RoomFeature GenFeature()
         {
-            switch (Globals.rand.Next())
+            switch (Globals.rand.Next(3))
             {
                 case 0:
                     return Painting_F.Generate();
@@ -87,6 +110,7 @@ namespace Final_Project
             set; 
         }
         public string name = "feature";
+        public bool used = false;
 
         public FeatureType type = FeatureType.EMPTY;
         public RoomFeature(Image image, string description)
@@ -97,6 +121,7 @@ namespace Final_Project
 
         public virtual void Interact(Entity interacter)
         {
+            used = true;
             return;
         }
         public virtual void Display(PictureBox box, Label label)

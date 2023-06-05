@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Final_Project
 {
-    class Monster : Entity
+    public class Monster : Entity
     {
-        public Monster(string name, float health, float accuracy, float strength) : base(name, health, accuracy, strength)
+        public Monster(string name, float health, float strength) : base(name, health, strength, Images.monster)
         {
 
         }
@@ -33,6 +33,17 @@ namespace Final_Project
             "Eater",
             "Slayer"
         };
+        public new List<string> getActions()
+        {
+            List<string> actions = base.getActions();
+            actions.Add("Spit");
+            return actions;
+        }
+        public string GetAction()
+        {
+            List<string> actions = getActions();
+            return actions[Globals.rand.Next(actions.Count)];
+        }
         public static Monster Generate()
         {
             string fName = possibleFNames[Globals.rand.Next(possibleFNames.Length)];
@@ -44,14 +55,14 @@ namespace Final_Project
             float accuracy = (float) Globals.rand.NextDouble();
             float strength = (float) Globals.rand.NextDouble();
 
-            Monster monster = new Monster(name, health, accuracy, strength);
+            Monster monster = new Monster(name, health, strength);
 
             int loot = Globals.rand.Next(GameSettings.MAX_MONSTER_LOOT);
             bool equipUsed = false;
             for (int i = 0; i < loot; i ++)
             {
                 float selection = (float) Globals.rand.NextDouble();
-                if (selection < .33f) // weapon
+                if (selection < .33f || i == 0) // weapon
                 {
                     Equipment weapon;
                     if (selection < .15f) weapon = VampiricWeapon.GenerateWeapon(); // vampiric weapon
@@ -59,6 +70,7 @@ namespace Final_Project
 
                     if (!equipUsed)
                     {
+                        monster.inventory.Add(weapon);
                         monster.quickSlots[0] = weapon;
                         equipUsed = true;
                     } else

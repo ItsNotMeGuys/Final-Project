@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInventory));
-            this.pbItemImage = new System.Windows.Forms.PictureBox();
             this.btnView = new System.Windows.Forms.Button();
             this.btnDrop = new System.Windows.Forms.Button();
             this.btnUse = new System.Windows.Forms.Button();
@@ -37,19 +36,11 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblItemStats = new System.Windows.Forms.Label();
             this.btnEquip = new System.Windows.Forms.Button();
-            this.lbInventoryItems = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).BeginInit();
+            this.lvInventoryItems = new System.Windows.Forms.ListView();
+            this.pbItemImage = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbItemImage
-            // 
-            this.pbItemImage.Location = new System.Drawing.Point(188, 28);
-            this.pbItemImage.Name = "pbItemImage";
-            this.pbItemImage.Size = new System.Drawing.Size(280, 280);
-            this.pbItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbItemImage.TabIndex = 1;
-            this.pbItemImage.TabStop = false;
             // 
             // btnView
             // 
@@ -71,6 +62,7 @@
             this.btnDrop.TabIndex = 3;
             this.btnDrop.Text = "Drop";
             this.btnDrop.UseVisualStyleBackColor = true;
+            this.btnDrop.Click += new System.EventHandler(this.btnDrop_Click);
             // 
             // btnUse
             // 
@@ -119,16 +111,26 @@
             this.btnEquip.UseVisualStyleBackColor = true;
             this.btnEquip.Click += new System.EventHandler(this.btnEquip_Click);
             // 
-            // lbInventoryItems
+            // lvInventoryItems
             // 
-            this.lbInventoryItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lbInventoryItems.FormattingEnabled = true;
-            this.lbInventoryItems.IntegralHeight = false;
-            this.lbInventoryItems.ItemHeight = 20;
-            this.lbInventoryItems.Location = new System.Drawing.Point(12, 28);
-            this.lbInventoryItems.Name = "lbInventoryItems";
-            this.lbInventoryItems.Size = new System.Drawing.Size(170, 367);
-            this.lbInventoryItems.TabIndex = 0;
+            this.lvInventoryItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lvInventoryItems.HideSelection = false;
+            this.lvInventoryItems.Location = new System.Drawing.Point(12, 28);
+            this.lvInventoryItems.MultiSelect = false;
+            this.lvInventoryItems.Name = "lvInventoryItems";
+            this.lvInventoryItems.Size = new System.Drawing.Size(170, 367);
+            this.lvInventoryItems.TabIndex = 8;
+            this.lvInventoryItems.UseCompatibleStateImageBehavior = false;
+            this.lvInventoryItems.View = System.Windows.Forms.View.List;
+            // 
+            // pbItemImage
+            // 
+            this.pbItemImage.Location = new System.Drawing.Point(188, 28);
+            this.pbItemImage.Name = "pbItemImage";
+            this.pbItemImage.Size = new System.Drawing.Size(280, 280);
+            this.pbItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbItemImage.TabIndex = 1;
+            this.pbItemImage.TabStop = false;
             // 
             // frmInventory
             // 
@@ -136,22 +138,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 407);
             this.ControlBox = false;
+            this.Controls.Add(this.lvInventoryItems);
             this.Controls.Add(this.btnEquip);
             this.Controls.Add(this.lblItemStats);
             this.Controls.Add(this.btnUse);
             this.Controls.Add(this.btnDrop);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.pbItemImage);
-            this.Controls.Add(this.lbInventoryItems);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmInventory";
             this.Text = "Inventory";
             this.Load += new System.EventHandler(this.frmInventory_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +169,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label lblItemStats;
         private System.Windows.Forms.Button btnEquip;
-        private System.Windows.Forms.ListBox lbInventoryItems;
+        private System.Windows.Forms.ListView lvInventoryItems;
     }
 }

@@ -11,9 +11,6 @@ namespace Final_Project
     public class Painting_F : RoomFeature
     {
         public bool is_trap;
-
-        bool used = false;
-
         public Painting_F(Image image, string description, bool trap) : base(image, description)
         {
             type = FeatureType.PAINTING;
@@ -23,12 +20,12 @@ namespace Final_Project
 
         public override void Interact(Entity interacter)
         {
-            if (used)
-                return;
+            base.Interact(interacter);
 
             if (is_trap)
             {
                 interacter.health -= GameSettings.PAINTING_DAMAGE;
+                MessageBox.Show("that was a trap painting!");
             } else
             {
                 Item painting = new Item("Painting", GameSettings.PAINTING_VALUE, 5, image);
@@ -50,20 +47,16 @@ namespace Final_Project
             Painting_F painting = new Painting_F(display, description, Globals.rand.Next(2) == 1);
             return painting;
         }
-        static Image[] painting_options;
-        private static void initPaintingOptions()
+        static Image[] painting_options = new Image[]
         {
-            painting_options = new Image[] {
-                Images.painting_a,
-                Images.painting_b,
-                Images.painting_c
-            };
-        }
+            Images.painting_a,
+            Images.painting_b,
+            Images.painting_c
+        };
     }
     public class Container : RoomFeature
     {
         Item item;
-        bool used = false;
         public Container(Image image, string description, Item item) : base(image, description)
         {
             this.type = FeatureType.EMPTY;
@@ -72,11 +65,9 @@ namespace Final_Project
 
         public override void Interact(Entity interacter)
         {
-            if (used)
-                return;
+            base.Interact(interacter);
 
             interacter.inventory.Add(item);
-            used = true;
         }
 
         public static new Container Generate()
@@ -126,6 +117,21 @@ namespace Final_Project
             return pedestal;
         }
     }
+    public class ItemFeature : RoomFeature
+    {
+        Item item;
+        public ItemFeature(Item item) : base(item.GetDisplay(), "An " + item.GetName().ToLower() + " on the floor")
+        {
+            this.name = item.GetName();
+            this.item = item;
+        }
+        public override void Interact(Entity interacter)
+        {
+            base.Interact(interacter);
+
+            interacter.inventory.Add(item);
+        }
+    }
     public class Door : RoomFeature
     {
         public Door(Image image, string description) : base(image, description)
@@ -136,26 +142,24 @@ namespace Final_Project
 
         public override void Interact(Entity interacter)
         {
+            base.Interact(interacter);
+
             Room.GenNewRoom();
         }
 
-        static Image[] images;
+        static Image[] images =
+        {
+            Images.door_a,
+            Images.door_b,
+            Images.door_c,
+            Images.door_d
+        };
         public static new Door Generate()
         {
             Image image = images[Globals.rand.Next(images.Length)];
             string description = "A nice door";
 
             return new Door(image, description);
-        }
-        public static void initDoorOptions()
-        {
-            images = new Image[]
-            {
-                Images.door_a,
-                Images.door_b,
-                Images.door_c,
-                Images.door_d
-            };
         }
     }
     public class Ladder : RoomFeature
@@ -168,6 +172,8 @@ namespace Final_Project
 
         public override void Interact(Entity interacter)
         {
+            base.Interact(interacter);
+
             Room.GenNewRoom();
         }
         public static new Ladder Generate()
@@ -183,9 +189,14 @@ namespace Final_Project
         {
             type = FeatureType.ENCOUNTER;
         }
+        Monster monster = null;
     
         public static MonsterEncounter EncounterMonster()
         {
+            MonsterEncounter encounter = new MonsterEncounter(Images.dead_monster, "A dead Monster");
+            encounter.monster = frmMonsterFight.FightMonster();
+
+            return encounter;
         }
     }
 }

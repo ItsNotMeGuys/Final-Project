@@ -24,14 +24,15 @@ namespace Final_Project
     }
     public class BasicWeapon : Equipment
     {
-        protected int damage;
+        public float damage;
 
-        public BasicWeapon(string name, int value, int weight, int damage, Image display) : base(name, value, weight, display)
+        public BasicWeapon(string name, int value, int weight, float damage, Image display) : base(name, value, weight, display)
         {
+            this.damage = damage;
         }
         public override int UseEquipment(Entity user, Entity target)
         {
-            target.health -= damage;
+            target.health -= damage * user.strength;
             if (target.health < 0)
                 target.health = 0;
 
@@ -77,7 +78,7 @@ namespace Final_Project
 
             int value = (int) (weight * (GameSettings.VALUE_MOD + ((Globals.rand.Next(2) == 0) ? -.25f : .25f)));
 
-            int damage = (int)(GameSettings.DAMAGE_MOD * weight);
+            float damage = GameSettings.DAMAGE_MOD * weight;
 
             Image display = Images.basic_weapon;
             int heavyThreshold = (int)(w_min + (GameSettings.HEAVY_WEAPON_THRESHOLD * (w_max - w_min)));

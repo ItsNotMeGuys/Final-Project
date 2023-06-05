@@ -10,11 +10,19 @@ namespace Final_Project
     {
         public static Random rand;
         public static Player player;
+        public static frmMain mainForm;
+
+        public static void Init()
+        {
+            rand = new Random();
+            player = new Player("Bogus");
+            player.inventory.Add(new BasicWeapon("Training sword", 0, 10, 15, Images.basic_weapon));
+            player.quickSlots[0] = player.inventory[0] as Equipment;
+        }
     }
     public class GameSettings
     {
-        public static float PLAYER_BASE_HEALTH = 50f;
-        public static float PLAYER_BASE_ACCURACY = .8f;
+        public static float PLAYER_BASE_HEALTH = 20f;
         public static float PLAYER_BASE_STRENGTH = 1;
 
         public static float PAINTING_DAMAGE = 10f;

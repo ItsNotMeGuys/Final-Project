@@ -49,6 +49,12 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Features.cs" />
+    <Compile Include="frmEnding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEnding.Designer.cs">
+      <DependentUpon>frmEnding.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,7 +73,13 @@
     <Compile Include="frmMonsterFight.Designer.cs">
       <DependentUpon>frmMonsterFight.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameSettings.cs" />
+    <Compile Include="frmStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStatusForm.Designer.cs">
+      <DependentUpon>frmStatusForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="frmSlotPopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,14 +97,23 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
+    <EmbeddedResource Include="frmEnding.resx">
+      <DependentUpon>frmEnding.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInventory.resx">
       <DependentUpon>frmInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMonsterFight.resx">
+      <DependentUpon>frmMonsterFight.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSlotPopup.resx">
       <DependentUpon>frmSlotPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStatusForm.resx">
+      <DependentUpon>frmStatusForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Images.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -152,6 +173,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pedestal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\end_fail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\end_run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\end_success.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

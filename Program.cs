@@ -14,6 +14,7 @@ namespace Final_Project
         [STAThread]
         static void Main()
         {
+            Globals.Init(); 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
